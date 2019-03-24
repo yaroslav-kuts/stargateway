@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const factory = require('./../db/factory');
 const Spaceship = require('./../models/Spaceship');
 const Route = require('./../models/Route');
+const { dbURI } = require('./../config');
 
 const { app } = require('./../index');
 
@@ -14,7 +15,7 @@ const agent = request(app);
 describe('/spaceships', () => {
   beforeEach(async () => {
     if (!mongoose.connection.db) {
-      await mongoose.connect('mongodb://localhost/stargateway');
+      await mongoose.connect(dbURI);
     }
     await mongoose.connection.db.dropDatabase();
   });

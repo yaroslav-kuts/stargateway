@@ -6,12 +6,13 @@ const Spaceship = require('./models/Spaceship');
 const Route = require('./models/Route');
 const { findSpaceship } = require('./middleware');
 const { getGates, parseMatrix } = require('./utils');
+const { port, pathToGatesFile } = require('./config');
 
 const readFile = util.promisify(fs.readFile);
 
 let gatesMatrix = [];
 
-readFile('./gates.txt', 'utf8')
+readFile(pathToGatesFile, 'utf8')
     .then((data) => {
         gatesMatrix = parseMatrix(data);
     })
@@ -39,7 +40,6 @@ app.post('/spaceships/:id/routes/:sector', findSpaceship, async ({ spaceship, pa
     return res.json({ routes });
 });
 
-const port = 3000;
-app.listen(port, () => console.log('Server running...'));
+app.listen(port, () => console.log(`Server running on ${port}`));
 
 module.exports = { app };
