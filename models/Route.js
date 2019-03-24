@@ -8,6 +8,12 @@ const routeSchema = new Schema({
     type: Schema.ObjectId,
     ref: 'Spaceship'
   },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
+
+routeSchema.index({ spaceship: 1, createdAt: -1 });
 
 module.exports = mongoose.model('Route', routeSchema);
