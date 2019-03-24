@@ -57,10 +57,16 @@ app.post('/spaceships/:id/to/:sector', async ({ params: { id, sector } }, res) =
             data: { id },
         });
     }  
-    const routes = gatesMatrix.map((gates, i) => ({ securityLevel: i, gates: getGates(sector, gates)}));
+    const routes = gatesMatrix.map((gates, i) => ({
+        securityLevel: i,
+        gates: getGates(sector, gates)
+    }));
     await Promise.all(routes.map(route => Route.create(route)));
     return res.json({ message: 'ok', data: routes });
 });
 
 const port = 3000;
 app.listen(port, () => console.log('Server running...'));
+
+
+module.exports = { app };
