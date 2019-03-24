@@ -10,4 +10,4 @@ const routeSchema = new Schema({
   },
 });
 
-module.exports = mongoose.model('Spaceship', routeSchema);
+module.exports = mongoose.model('Route', routeSchema);
