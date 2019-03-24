@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const app = require('express')();
 const db = require('./db');
 const Spaceship = require('./models/Spaceship');
+const Route = require('./models/Route');
 // const seeds = require('./db/seeds');
 
 let gatesMatrix = [];
@@ -55,9 +56,10 @@ app.post('/spaceships/:id/to/:sector', async ({ params: { id, sector } }, res) =
             message: 'There is no such spaceship',
             data: { id },
         });
-    }
-    const result = gatesMatrix.map((gates, i) => ({ securityLevel: i, gates: getGates(sector, gates)}));
-    return res.json({ message: 'ok', data: result });   
+    }  
+    const routes = gatesMatrix.map((gates, i) => ({ securityLevel: i, gates: getGates(sector, gates)}));
+    await Promise.all(routes.map(route => Route.create(route)));
+    return res.json({ message: 'ok', data: routes });
 });
 
 const port = 3000;
