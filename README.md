@@ -1,24 +1,24 @@
 # stargateway
 Dev Challenge 2019 Online Round
 
-Execute the following command to load spaceships:
-
+Execute following command to load spaceships:
+```
 npm run seeds
-
-Execute the following command to run tests:
-
+```
+Execute following command to run tests:
+```
 npm test
-
+```
 API description:
 
 1) Show all spaceships:
 
-GET /spaceships
+**GET /spaceships**
 
 2) Show individual spaceship and it's routes:
 
-GET /spaceships/<spaceship-id>
+**GET /spaceships/\<spaceship-id\>**
 
 3) Find routes for spaceship:
 
-POST /spaceships/<spaceship-id>/routes/<sector>
+**POST /spaceships/\<spaceship-id\>/routes/\<sector\>**
