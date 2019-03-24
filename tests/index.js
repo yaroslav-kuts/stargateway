@@ -37,4 +37,27 @@ describe('/spaceships', () => {
       });
     });
   });
+
+  describe('GET /spaceships/:id', () => {
+    describe('should return status 200 OK', () => {
+      it('for existing spaceship', async () => {
+          const spaceship = await factory.create('spaceship');
+          const { 
+            status, body: { data: { name, sector } }
+          } = await agent.get(`/spaceships/${spaceship._id}`);
+          status.should.equal(200);
+          name.should.equal(spaceship.name);
+          sector.should.equal(spaceship.sector);
+      });
+    });
+
+    describe('should return status 404 Not Found', () => {
+      it('for not existing spaceship', async () => {
+          const spaceship = await factory.build('spaceship');
+          const { status, body: { message } } = await agent.get(`/spaceships/${spaceship._id}`);
+          status.should.equal(404);
+          message.should.equal('There is no such spaceship');
+      });
+    });
+  });
 });
