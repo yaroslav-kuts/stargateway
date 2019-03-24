@@ -1,14 +1,14 @@
 # stargateway
 Dev Challenge 2019 Online Round
 
-Execute following command to load spaceships:
-```
-npm run seeds
-```
-Execute following command to run tests:
-```
-npm test
-```
+To run server:
+1) Execute: ```docker-compose up```
+2) Load spaceships: ```docker exec -d stargateway npm run seeds```
+
+To run tests:
+1) Execute: ```npm install```
+2) Execute: ```npm test```
+
 API description:
 
 1) Show all spaceships:
