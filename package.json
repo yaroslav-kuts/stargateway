@@ -4,7 +4,8 @@
   "description": "Dev Challenge Node.js Online Round ",
   "main": "index.js",
   "scripts": {
-    "test": "npx mocha --exit --timeout 5000 ./tests"
+    "test": "npx mocha --exit --timeout 5000 ./tests",
+    "seeds": "node ./db/seeds"
   },
   "keywords": [
     "node.js"
