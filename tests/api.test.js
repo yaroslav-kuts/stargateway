@@ -43,8 +43,8 @@ describe('/spaceships', () => {
     describe('should return status 200 OK', () => {
       it('for existing spaceship', async () => {
         const spaceship = await factory.create('spaceship');
-        const { 
-          status, body: { name, sector }
+        const {
+          status, body: { name, sector },
         } = await agent.get(`/spaceships/${spaceship._id}`);
         status.should.equal(200);
         name.should.equal(spaceship.name);
@@ -66,8 +66,8 @@ describe('/spaceships', () => {
       it('for existing spaceship', async () => {
         const sector = 56;
         const { id: spaceship } = await factory.create('spaceship');
-        const { 
-          status, body: { routes }
+        const {
+          status, body: { routes },
         } = await agent.post(`/spaceships/${spaceship}/routes/${sector}`);
         status.should.equal(200);
 

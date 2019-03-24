@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { dbURI } = require('../config');
 
-const options = { 
+const options = {
   poolSize: 10,
   useNewUrlParser: true,
   useCreateIndex: true,

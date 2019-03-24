@@ -1,4 +1,4 @@
-const factory = require('factory-girl').factory;
+const { factory } = require('factory-girl');
 const Spaceship = require('../models/Spaceship');
 
 factory.define('spaceship', Spaceship, {

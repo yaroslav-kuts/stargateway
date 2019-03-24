@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+
+const { Schema } = mongoose;
 
 const spaceshipSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
   },
   sector: Number,
 });
