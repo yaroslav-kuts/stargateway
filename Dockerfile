@@ -1,12 +1,13 @@
 FROM node:10
 
-WORKDIR /app
+RUN mkdir -p /usr/src/stargateway
+WORKDIR /usr/src/stargateway
 
-ADD package.json package.json
-
+COPY package.json /usr/src/stargateway/
+COPY package-lock.json /usr/src/stargateway/
 RUN npm install
 
-ADD . .
+COPY . /usr/src/stargateway
 
 EXPOSE 3000
 
