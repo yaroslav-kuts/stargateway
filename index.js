@@ -2,6 +2,7 @@ require('./db');
 const fs = require('fs');
 const util = require('util');
 const express = require('express');
+const redis = require('redis');
 const Spaceship = require('./models/Spaceship');
 const Route = require('./models/Route');
 const { findSpaceship } = require('./middleware');
@@ -18,6 +19,10 @@ readFile(pathToGatesFile, 'utf8')
   })
   .catch(console.log);
 
+const cache = redis.createClient({ host: 'redis', port: 6379 });
+const set = util.promisify(cache.set).bind(cache);
+const get = util.promisify(cache.get).bind(cache);
+
 const app = express();
 
 app.get('/', (req, res) => res.json({ message: 'ok' }));
@@ -32,10 +37,13 @@ app.get('/spaceships/:id', findSpaceship, async ({ spaceship }, res) => {
 app.post('/spaceships/:id/routes/:sector', findSpaceship, async ({ spaceship, params: { sector } }, res) => {
   spaceship.sector = sector;
   await spaceship.save();
-  const routes = gatesMatrix.map((gates, i) => ({
+  let routes = await get(String(sector));
+  if (routes) return res.json({ routes: JSON.parse(routes) });
+  routes = gatesMatrix.map((gates, i) => ({
     securityLevel: i + 1,
     gates: getGates(sector, gates),
   }));
+  await set(String(sector), JSON.stringify(routes), 'EX', 300);
   await Promise.all(routes.map(route => Route.create({ ...route, spaceship: spaceship._id })));
   return res.json({ routes });
 });
