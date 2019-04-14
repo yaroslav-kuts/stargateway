@@ -12,6 +12,7 @@
   ],
   "author": "Yaroslav Kuts",
   "license": "MIT",
+  "repository": "https://github.com/zzzonked/stargateway",
   "dependencies": {
     "express": "^4.16.4",
     "factory-girl": "^5.0.4",
