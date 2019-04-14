@@ -9,11 +9,9 @@ const { findSpaceship } = require('./middleware');
 const { getGates, parseMatrix } = require('./utils');
 const { port, pathToGatesFile } = require('./config');
 
-const readFile = util.promisify(fs.readFile);
-
 let gatesMatrix = [];
 
-readFile(pathToGatesFile, 'utf8')
+fs.promises.readFile(pathToGatesFile, 'utf8')
   .then((data) => {
     gatesMatrix = parseMatrix(data);
   })
