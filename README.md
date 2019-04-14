@@ -1,6 +1,8 @@
 # stargateway
 Dev Challenge 2019 Online Round
 
+**Task description:** [stargateway.pdf](https://github.com/zzzonked/stargateway/blob/master/Node.js%20Task.pdf)
+
 To run server:
 1) Execute: ```docker-compose up```
 2) Load spaceships: ```docker exec -d stargateway npm run seeds```
@@ -24,3 +26,9 @@ API description:
 3) Find routes for spaceship:
 
 **POST /spaceships/\<spaceship-id\>/routes/\<sector\>**
+
+TODO:
+* Dynamically generate swagger docs
+* Listen 'gates.txt' changes(using fs.watch())
+* Cache 'gatesMatrix' to the Redis
+* Move controller functions to the separate module
